@@ -1,0 +1,42 @@
+label {
+  padding: 10px;
+}
+input {
+  padding: 5px;
+  margin: 5px;
+}
+th {
+  background-color: red;
+  color: white;
+  padding: 10px;
+}
+td {
+  padding: 5px;
+}
+button {
+  padding: 15px;
+  margin: 8px;
+}
+#add{
+  color: blue;
+}
+#del{
+  padding: 2px;
+  color: red;
+}
+#edi{
+  padding: 2px;
+  color: blue;
+}
+#cancel{
+  color: red;
+}
+#done{
+  color: rgb(34, 136, 225);
+
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
