@@ -1,0 +1,122 @@
+<div class="card">
+  <div class="card-header">{{name}}</div>
+  <div *ngIf="add_form">
+    <button id="add" (click)="addUser()">Add User</button>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="registerForm">
+      <div class="form-group col">
+        <label>First Name</label>
+        <input type="text" formControlName="firstName" [ngClass]="{'is-invalid': submitted && formValues.firstName.errors}">
+        <div *ngIf="submitted && formValues.firstName.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.firstName.errors.required">First Name is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>Last Name</label>
+        <input type="text" formControlName="lastName" [ngClass]="{'is-invalid': submitted && formValues.lastName.errors}">
+        <div *ngIf="submitted && formValues.lastName.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.lastName.errors.required">Last Name is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>Email</label>
+        <input type="email" [email]="true" formControlName="email" [ngClass]="{'is-invalid': submitted && formValues.email.errors}">
+        <div *ngIf="submitted && formValues.email.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.email.errors.required">Email is required</div>
+          <div class="invalid-feedback" *ngIf="submitted && formValues.email.errors.email">Enter a valid email</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>Phone</label>
+        <input type="number" formControlName="phone" minlength="10" [ngClass]="{'is-invalid': submitted && formValues.phone.errors}">
+        <div *ngIf="submitted && formValues.phone.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.phone.errors.required">Phone is required</div>
+          <div class="invalid-feedback" *ngIf="submitted && formValues.phone.errors.pattern">Phone is invalid</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>Company</label>
+        <input type="text" formControlName="company" [ngClass]="{'is-invalid': submitted && formValues.company.errors}">
+        <div *ngIf="submitted && formValues.company.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.company.errors.required">Company is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>Gender</label>
+        <div>
+          <input id="male" type="radio" value="male" name="gender" formControlName="gender">
+          <label for="male">Male</label>
+        </div>
+        <div>
+          <input id="female" type="radio" value="female" name="gender" formControlName="gender">
+          <label for="female">Female</label>
+        </div>
+        <div *ngIf="submitted && formValues.gender.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.gender.errors.required">Gender is required</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>DOB</label>
+        <input type="date" formControlName="dob" [ngClass]="{'is-invalid': submitted && formValues.dob.errors}">
+        <div *ngIf="submitted && formValues.dob.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.dob.errors.required">DOB is required</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>Password</label>
+        <input type="password" (blur)="changeVal2($event.target.value)" formControlName="password" [ngClass]="{'is-invalid': submitted && formValues.password.errors}">
+        <div *ngIf="submitted && formValues.password.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.password.errors.required">Password is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label>Confirm Fassword</label>
+        <input type="password" (input)="changeVal1($event.target.value)" formControlName="confirmPassword" [ngClass]="{'is-invalid': submitted && formValues.confirmPassword.errors}">
+        <div *ngIf="submitted && formValues.confirmPassword.errors">
+          <div class="invalid-feedback" *ngIf="submitted && formValues.confirmPassword.errors.required">Confirm Password
+            is required</div>
+          <div class="invalid-feedback" *ngIf="submitted && formValues.confirmPassword.errors.mismatch">Password and
+            Confirm password are not matched</div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button id="done" class="btn btn-primary" (click)="submitForm()">{{add_form ? 'Register' : 'Update'}}</button>
+        <button id="Cancel" (click)="cancelForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="registeredUsers.length > 0">
+    <table>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Company</th>
+        <th>DOB</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <tr *ngFor="let user of registeredUsers; let i=index;">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.company }}</td>
+        <td>{{ user.dob }}</td>
+        <td>
+          <button id="edi" (click)="editUser(user)">Edit</button>
+        </td>
+        <td>
+          <button id="del" (click)="deleteUser(user)">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
